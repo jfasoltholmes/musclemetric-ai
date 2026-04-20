@@ -12,6 +12,7 @@ At the moment, the project includes:
 
 - Flask backend
 - Drag-and-drop image upload UI
+- In-memory image processing
 - Basic file validation
 - OpenAI API integration
 - Preliminary results page
@@ -21,7 +22,6 @@ Some parts are still rough or incomplete, including:
 
 - Analysis flow cleanup
 - Better backend/service separation
-- Safer image handling
 - Improved output structure
 - Deployment readiness
 
@@ -29,7 +29,6 @@ Some parts are still rough or incomplete, including:
 
 - Secrets are stored in environment variables and are not committed.
 - This repo reflects an earlier stage of the project before a fuller refactor.
-- A future refactor will likely move uploaded image handling into memory instead of saving files locally.
 
 ## Tech Stack
 
