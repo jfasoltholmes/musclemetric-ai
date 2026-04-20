@@ -1,0 +1,146 @@
+body {
+    background-color: #171717;
+}
+
+#title{
+    color: #ffffff;
+    font-size: 24px;
+    text-align: center;
+}
+
+h2 {
+    color: #707070;
+    font-size: 20px;
+    text-align: center;
+}
+
+#title h1 {
+    font-size: 26px;
+    text-align: left;
+    display: inline-block;
+}
+
+#img-submission {
+    border: dashed 2px #CCCCCC;
+    border-radius: 10px;
+    background-color: #ffffff;
+    width: 350px;
+    height: 225px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    padding: 20px;
+    color: #171717;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+#submission-container { 
+    background-color: #ffffff;
+    border: solid 2px #CCCCCC;
+    border-radius: 10px;
+    width: 400px;
+    height: 275px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 30px 10px 30px 10px;
+    
+}
+
+#img-submission p {
+    font-size: 14px;
+    color: #707070;
+}
+
+#photo-button {
+    background-color: #ffffff;
+    color: #171717;
+    border: solid 1px #CCCCCC;
+    padding: 10px 20px;
+    border-radius: 5px;
+}
+
+.cursor {
+    display: inline-block;
+    width: 2px;
+    margin-left: 4px;
+    background: #ffffff;
+}
+
+.cursor.blink {
+    animation: blink 0.8s infinite step-end;
+}
+@keyframes blink {
+    0%, 100% { 
+        background: #ffffff; 
+    }
+    40%, 50% { 
+        background: transparent; 
+    }
+}
+
+#disclaimer {
+    font-size: 13px;
+    color: #707070;
+    text-align: center;
+    margin-top: 10px;
+}
+
+#cancel-button, #analyze-button {
+    background-color: #ffffff;
+    color: #171717;
+    border: solid 1px #CCCCCC;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    pointer-events: auto;
+    margin-top: -5px;
+}
+
+#cancel-button:hover {
+    background-color: #FF474c;
+}
+
+#analyze-button:hover {
+    background-color: #88E788;
+}
+
+#dragdrop, 
+#img-submission svg {
+    pointer-events: none;
+}
+
+#flash-messages {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    z-index: 1000;
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.msg {
+    display: flex;
+    align-items: center;
+}
+
+.msg-content {
+    padding: 5px 0px 0px 5px;
+}
+
+.hide-msg {
+    opacity: 0;
+    transition: opacity 0.5s ease-out;
+}
+
+.show-msg {
+    opacity: 1;
+    transition: opacity 0.5s ease-in;
+}

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>MuscleMetrics.ai</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='analysis.css') }}" />
+</head>
+<body>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <div id="flash-messages" class="hide-msg">
+                {% for category, message in messages %}
+                    {% if category == 'success' %}
+                        <div id="success-msg" class="msg hide-msg"><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" 
+                                  fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" 
+                                  stroke-linejoin="round" class="lucide lucide-bot-icon lucide-bot"><path d="M12 8V4H8"/>
+                                  <rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/>
+                                  <path d="M15 13v2"/><path d="M9 13v2"/></svg>  <div class="msg-content">{{ message }}</div></div>
+                    {% elif category == 'error' %}
+                        <div id="error-msg" class="msg hide-msg"><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" 
+                                  fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" 
+                                  stroke-linejoin="round" class="lucide lucide-bot-icon lucide-bot"><path d="M12 8V4H8"/>
+                                  <rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/>
+                                  <path d="M15 13v2"/><path d="M9 13v2"/></svg>  <div class="msg-content">{{ message }}</div></div>
+                    {% else %}
+                    <div class="flash-{{ category }}">{{ message }}</div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+
+    <div id="title">
+        <svg width="50" height="50" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <g clip-path="url(#clip0_1_3)">
+        <path d="M18.409 18.017C18.8648 16.9604 19.6711 16.0934 20.6919 15.5622C21.7127 15.031 22.8855 14.8682 24.0124 15.1011C25.1393 15.3341 26.1513 15.9487 26.8777 16.8411C27.6042 17.7336 28.0006 18.8493 28 20C28 23.866 24 27 19 27C14.923 27 10.847 26.18 8.629 24.538C8.203 24.222 7.998 23.706 8.009 23.176C8.118 17.723 8.627 7 16 7C16.7957 7 17.5587 7.31607 18.1213 7.87868C18.6839 8.44129 19 9.20435 19 10C19 10.5304 18.7893 11.0391 18.4142 11.4142C18.0391 11.7893 17.5304 12 17 12C15.895 12 15.36 11.556 15 11" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M21 19C20.3965 18.5471 19.6983 18.2367 18.9578 18.092C18.2172 17.9473 17.4535 17.9721 16.724 18.1645C15.9944 18.3569 15.3178 18.7119 14.7449 19.203C14.172 19.694 13.7177 20.3084 13.416 21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M15.964 11.825C14.019 12.977 15.5 18 14 20" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M18 0.5C27.6923 0.5 35.5 7.91384 35.5 17C35.5 26.0862 27.6923 33.5 18 33.5C8.30771 33.5 0.5 26.0862 0.5 17C0.5 7.91384 8.30771 0.5 18 0.5Z" stroke="#f97316"/>
+        <path d="M29.3536 29.6464L43.3536 43.6464" stroke="#f97316"/>
+        </g>
+        </svg>
+        <h1>Muscle<br>Metrics.ai</h1>
+    </div>
+
+    <div class="results-container">
+        <h1>Body Fat Percentage with photo</h1>
+        <h3>Estimated Body Fat Percentage: {{ bfEstimate_response }}</h3>
+        <img src="{{ image_data }}" alt="Uploaded Image" id="uploaded-image">
+
+    </div>    
+    <div class="results-container">
+        <h1>Bulk or Cut</h1>
+        <p>{{ boc_response }}</p>
+        <h3>Header Point</h3>
+        <p>Description</p>
+    </div>
+    <div class="results-container">
+        <h1>Helpful insights</h1>
+    </div>
+    <div class="results-container">
+        <h1>Physique Assessment</h1>
+        <p>Strong Points</p>
+        <p>Weak Points</p>
+        <p>Body Fat Distribution</p>
+    </div>
+    <div class="results-container">
+        <h1>Estimated goal timelines to reach specific body composition goals</h1>
+    </div>
+    <div class="results-container">
+        <h1>Macronutrient/Water/Sleep Advice based on tips</h1>
+    </div>
+    <div class="results-container">
+        <h1>Motivational Quote</h1>
+    </div>
+    <script src="{{ url_for('static', filename='analysis.js')}}"></script>
+</body>
+</html>
