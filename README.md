@@ -1,12 +1,18 @@
 # MuscleMetrics.ai
 
-A Flask-based web application for visual physique analysis using AI.
+A Flask-based web application for visual physique analysis using AI-generated structured insights.
 
 Users can upload an image and receive a structured, AI-generated assessment including estimated body fat range, training recommendation (bulk/cut/etc.), and physique feedback.
 
 ## Current State
 
 This project has been refactored into a modular architecture and now supports structured AI responses.
+
+### Design Principles
+
+- Analysis is based strictly on visible features in the image
+- The system avoids overgenerated or forced feedback (e.g., no invented weak points)
+- Output is structured but intentionally restrained to improve realism and trust
 
 ### Implemented
 
@@ -15,7 +21,7 @@ This project has been refactored into a modular architecture and now supports st
 - In-memory image processing (no file persistence)
 - File validation (type + basic checks)
 - OpenAI API integration using image + structured outputs
-- Single-call analysis pipeline (reduced latency and cost)
+- Single-call analysis pipeline using OpenAI structured outputs (reduced latency and cost)
 - Pydantic schema for structured response parsing
 - Service layer for AI logic (services/)
 - Utility layer for config + file handling (utils/)
@@ -23,14 +29,15 @@ This project has been refactored into a modular architecture and now supports st
 ### Analysis Output Includes
 
 - Estimated body fat range
-- Confidence level
 - Recommended goal (bulk, cut, maintain, recomp)
 - Rationale and actionable guidance
 - Physique assessment:
   - Strengths
-  - Improvement areas
+  - Weak points (if visible)
   - Body fat distribution
-- Image quality / limitations note
+- Improvement priorities
+- Image quality note
+- Image-specific limitations and interpretation notes
 
 ## Tech Stack
 
