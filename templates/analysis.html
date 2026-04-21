@@ -43,36 +43,99 @@
         <h1>Muscle<br>Metrics.ai</h1>
     </div>
 
-    <div class="results-container">
-        <h1>Body Fat Percentage with photo</h1>
-        <h3>Estimated Body Fat Percentage: {{ bfEstimate_response }}</h3>
-        <img src="{{ image_data }}" alt="Uploaded Image" id="uploaded-image">
+    {% if analysis.status.value == 'ok' %}
+        <div id="summary-card" class="results-container">
+            <img src="{{ image_data }}" alt="Uploaded Image" id="uploaded-image">
 
-    </div>    
-    <div class="results-container">
-        <h1>Bulk or Cut</h1>
-        <p>{{ boc_response }}</p>
-        <h3>Header Point</h3>
-        <p>Description</p>
-    </div>
-    <div class="results-container">
-        <h1>Helpful insights</h1>
-    </div>
-    <div class="results-container">
-        <h1>Physique Assessment</h1>
-        <p>Strong Points</p>
-        <p>Weak Points</p>
-        <p>Body Fat Distribution</p>
-    </div>
-    <div class="results-container">
-        <h1>Estimated goal timelines to reach specific body composition goals</h1>
-    </div>
-    <div class="results-container">
-        <h1>Macronutrient/Water/Sleep Advice based on tips</h1>
-    </div>
-    <div class="results-container">
-        <h1>Motivational Quote</h1>
-    </div>
+            <div class="summary-text">
+                <h2>Estimated Body Fat Range</h2>
+                <p>{{ analysis.body_fat_range }}</p>
+
+                <h3>Image Quality Note</h3>
+                <p>{{ analysis.image_quality_note }}</p>
+            </div>
+        </div>
+
+        <div id="goal-card" class="results-container">
+            <h2>{{ analysis.goal.recommendation.value|capitalize }}</h2>
+            <p>{{ analysis.goal.rationale }}</p>
+
+            <h3>How to Approach It</h3>
+            <p>{{ analysis.goal.action_summary }}</p>
+        </div>
+
+        <div id="physique-card" class="results-container">
+            <h2>Physique Assessment</h2>
+
+            <h3>Strong Points</h3>
+            <ul>
+                {% for point in analysis.physique_assessment.strong_points %}
+                    <li>{{ point }}</li>
+                {% endfor %}
+            </ul>
+
+            {% if analysis.physique_assessment.weak_points %}
+                <h3>Weak Points</h3>
+                <ul>
+                    {% for point in analysis.physique_assessment.weak_points %}
+                        <li>{{ point }}</li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <h3>Weak Points</h3>
+                <p>No clearly visible weak points from this image.</p>
+            {% endif %}
+
+            <h3>Body Fat Distribution</h3>
+            <p>{{ analysis.physique_assessment.fat_distribution }}</p>
+        </div>
+
+        <div id="improvement-card" class="results-container">
+            <h2>Improvement Priorities</h2>
+            <ul>
+                {% for priority in analysis.improvement_focus.top_priorities %}
+                    <li>{{ priority }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        {% if analysis.assessment_limitations.photo_limitations or analysis.assessment_limitations.interpretation_notes %}
+            <div id="limitations-card" class="results-container">
+                <h2>Limitations</h2>
+
+                {% if analysis.assessment_limitations.photo_limitations %}
+                    <h3>Photo Limitations</h3>
+                    <ul>
+                        {% for limitation in analysis.assessment_limitations.photo_limitations %}
+                            <li>{{ limitation }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+                
+                {% if analysis.assessment_limitations.interpretation_notes %}
+                    <h3>Interpretation Notes</h3>
+                    <ul>
+                        {% for note in analysis.assessment_limitations.interpretation_notes %}
+                            <li>{{ note }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            </div>
+        {% else %}
+            <div id="limitations-card" class="results-container">
+                <h2>Limitations</h2>
+                <p>No major image-specific limitations were identified from this photo.</p>
+            </div>
+        {% endif %}
+
+        
+    {% else %}
+        <div class="results-container">
+            <h2>We couldn't assess this image</h2>
+            <p>{{ analysis.image_quality_note }}</p>
+        </div>
+    {% endif %}
+
     <script src="{{ url_for('static', filename='analysis.js')}}"></script>
 </body>
 </html>

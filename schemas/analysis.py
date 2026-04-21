@@ -5,11 +5,6 @@ class AnalysisStatus(str, Enum):
     OK = "ok"
     UNABLE_TO_ASSESS = "unable_to_assess"
 
-class ConfidenceLevel(str, Enum):
-    LOW = "low"
-    MEDIUM = "medium"
-    HIGH = "high"
-
 class GoalRecommendation(str, Enum):
     BULK = "bulk"
     CUT = "cut"
@@ -40,7 +35,7 @@ class PhysiqueAssessment(BaseModel):
     weak_points: list[str] = Field(
         ...,
         description=(
-            "List of 1-4 observable physique weaknesses. " \
+            "List of 0-3 observable physique weaknesses. " \
             "Each item should be one short sentence, ideally under 15 words. " \
             "Keep each item focused on one clear idea."
         )
@@ -53,6 +48,32 @@ class PhysiqueAssessment(BaseModel):
         )
     )
 
+class ImprovementFocus(BaseModel):
+    top_priorities: list[str] = Field(
+        ...,
+        description=(
+            "List of 1-3 improvement priorities. " \
+            "Each item should be one short sentence, ideally under 15 words. " \
+            "Keep each item focused on one clear idea."
+        )
+    )
+
+class AssessmentLimitations(BaseModel):
+    photo_limitations: list[str] = Field(
+        ...,
+        description=(
+            "List of 0-3 image-specific limitations that reduce assessment quality. " \
+            "Each item should be one short sentence, ideally under 15 words."
+        )
+    )
+    interpretation_notes: list[str] = Field(
+        ...,
+        description=(
+            "List of 0-3 notes explaining how the image should be interpreted carefully. " \
+            "Each item should be one short sentence, ideally under 15 words."
+        )
+    )
+
 class BodyCompositionAnalysis(BaseModel):
     status: AnalysisStatus
     body_fat_range: str = Field(
@@ -62,8 +83,9 @@ class BodyCompositionAnalysis(BaseModel):
     )
     image_quality_note: str = Field(
         ...,
-        description="Short note about image quality or limitations affecting confidence."
+        description="Short note about image quality or visual limitations affecting the assessment."
     )
-    confidence: ConfidenceLevel
     goal: GoalSection
     physique_assessment: PhysiqueAssessment
+    improvement_focus: ImprovementFocus
+    assessment_limitations: AssessmentLimitations
