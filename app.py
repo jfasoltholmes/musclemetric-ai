@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template, flash
+from flask import Flask, request, render_template, flash, redirect, url_for
 from flask_cors import CORS
 from dotenv import load_dotenv
 import base64
@@ -25,52 +25,48 @@ def index():
     return render_template('index.html')
 
 
-#Decorator to handle OpenAI API calls, maybe seperate this into a main.py file later
+#Decorator to handle OpenAI API calls
 @app.route('/scan', methods=['POST'])
 def scan():
     try:
         if 'image-submission' not in request.files:
             flash("No file part in the request", "error")
-            return render_template('index.html')
+            return redirect(url_for('index'))
         
         image_file = request.files['image-submission']
 
         if image_file.filename == '':
             flash("No file selected", "error")
-            return render_template('index.html')
+            return redirect(url_for('index'))
         
         if not allowed_file(image_file.filename):
             flash("Invalid file type. Please upload a PNG, JPG, or JPEG image.", "error")
-            return render_template('index.html')
+            return redirect(url_for('index'))
         
         mime_type = get_mime_type(image_file.filename)
         if not mime_type:
             flash("Unsupported image type.", "error")
-            return render_template('index.html')
+            return redirect(url_for('index'))
         
         image_bytes = image_file.read()
         if not image_bytes:
             flash("Uploaded file is empty.", "error")
-            return render_template('index.html')
+            return redirect(url_for('index'))
         
         base64_image = base64.b64encode(image_bytes).decode("utf-8")
         data_url = f"data:{mime_type};base64,{base64_image}"
-
-        # Image successfully processed into memory, now call OpenAI API
-        flash(f"File successfully processed in memory!", "success")
         
         analysis = analyze_physique(data_url)
 
         if analysis.status == AnalysisStatus.UNABLE_TO_ASSESS:
             flash("Unable to analyze image. Please try a clearer image.", "error")
-            return render_template('index.html')
+            return redirect(url_for('index'))
 
         return render_template('analysis.html', image_data=data_url, analysis=analysis)
 
     except Exception as e:
         flash(f"An error occurred: {str(e)}", "error")
-        return render_template('index.html')
-     
+        return redirect(url_for('index'))
 
 if __name__ == '__main__':
     # Remove the debug=True line to run in production mode
