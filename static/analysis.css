@@ -1,14 +1,29 @@
+:root {
+    --bg-dark: #171717;
+    --card-bg: #ffffff;
+    --card-border: #CCCCCC;
+
+    --text-primary: #171717;
+    --text-secondary: #707070;
+    --text-muted: #555555;
+    --text-disclaimer: #C9C5BE;
+
+    --brand-accent: #f97316;
+    --brand-accent-soft: #f59e0b;
+}
+
 body {
-    background-color: #171717;
+    background-color: var(--bg-dark);
 }
 
 .results-container {
-    background-color: #ffffff;
-    border: solid 2px #CCCCCC;
+    background-color: var(--card-bg);
+    border: solid 2px var(--card-border);
     border-radius: 10px;
-    width: 700px;
-    display: block;
-    margin: 0px auto 15px auto;
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto 15px;
+    box-sizing: border-box;
 }
 
 #flash-messages {
@@ -16,7 +31,7 @@ body {
     top: 10px;
     right: 10px;
     z-index: 1000;
-    background-color: #ffffff;
+    background-color: var(--card-bg);
     padding: 20px;
     border-radius: 10px;
     cursor: pointer;
@@ -28,7 +43,7 @@ body {
 }
 
 .msg-content {
-    padding: 5px 0px 0px 5px;
+    padding: 5px 0 0 5px;
 }
 
 .hide-msg {
@@ -42,23 +57,62 @@ body {
 }
 
 #uploaded-image {
-    width: 250px;
-    height: 250px;
+    width: 180px;
+    height: 180px;
     border-radius: 10px;
-    margin: 0px 0px 15px 15px;
+    object-fit: cover;
+    flex-shrink: 0;
 }
 
+#summary-card {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    padding: 25px 30px;
+}
 
-#title{
-    color: #ffffff;
-    font-size: 24px;
+.summary-text {
+    flex: 1;
+    min-width: 0;
+}
+
+.summary-text h2 {
+    text-align: left;
+    margin-bottom: 10px;
+}
+
+.summary-text h3 {
+    margin-top: 25px;
+    margin-bottom: 8px;
+    font-size: 18px;
+    color: var(--text-primary);
+}
+
+.summary-text p {
+    margin: 0;
+    line-height: 1.5;
+    color: var(--text-primary);
+}
+
+.summary-text .body-fat-value {
+    font-size: 28px;
+    font-weight: 600;
+    color: var(--brand-accent);
+    margin: 6px 0 0 4px;
+}
+
+.image-note {
+    color: var(--text-muted);
+}
+
+#title {
+    color: var(--card-bg);
     text-align: center;
 }
 
 h2 {
-    color: #707070;
+    color: var(--text-primary);
     font-size: 20px;
-    text-align: center;
 }
 
 #title h1 {
@@ -69,7 +123,7 @@ h2 {
 
 #disclaimer {
     font-size: 13px;
-    color: #C9C5BE;
+    color: var(--text-disclaimer);
     text-align: center;
     margin-top: 10px;
 }

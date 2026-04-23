@@ -91,6 +91,13 @@ function setupEventListeners() {
 
     // Image input change listener
     imageInput.addEventListener('change', handleImageChange);
+
+    // UX Loading design
+    const form = document.querySelector("#form-area")
+    form.addEventListener("submit", (event) => {
+        const loader = document.querySelector(".loader")
+        loader.classList.remove("loader-hidden");
+})
 }
 
 
@@ -146,7 +153,6 @@ function typeText() {
     }
 }
 // End of type text animation
-
 
 document.addEventListener('DOMContentLoaded', function() {
     //Store original HTML content to use when canceling upload

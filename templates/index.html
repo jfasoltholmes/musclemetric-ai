@@ -45,9 +45,9 @@
     <h2>
         <div id="sub-title"></div>
     </h2>
-    <!--<h2>Scan. Analyze. Progress.</h2>-->
-    
+
     <div id="submission-container">
+        <div class="loader loader-hidden"></div>
         <form action="{{ url_for('scan') }}" id="form-area" method = "post" enctype="multipart/form-data">
             <label for="image-input">
                 <input type="file" name="image-submission"id="image-input" accept="image/*" required hidden/>
