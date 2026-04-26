@@ -127,3 +127,16 @@ h2 {
     text-align: center;
     margin-top: 10px;
 }
+
+#home-button {
+    background-color: #ffffff;
+    color: #171717;
+    border: solid 1px #CCCCCC;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#home-button:hover {
+    background-color: var(--brand-accent-soft);
+}
