@@ -51,7 +51,7 @@
                 <h2>Estimated Body Fat:</h2>
                 <p class="body-fat-value">{{ analysis.body_fat_range }}</p>
 
-                <h3>Image Assessment</h3>
+                <h3>Image Assessment:</h3>
                 <p>{{ analysis.image_quality_note }}</p>
             </div>
 
@@ -59,10 +59,10 @@
         </div>
 
         <div id="goal-card" class="results-container">
-            <h2>{{ analysis.goal.recommendation.value|capitalize }}:</h2>
+            <h2>New Plan: {{ analysis.goal.recommendation.value|capitalize }}</h2>
             <p>{{ analysis.goal.rationale }}</p>
 
-            <h3>Suggested Approach</h3>
+            <h3>Where to go from here:</h3>
             <p>{{ analysis.goal.action_summary }}</p>
         </div>
 
