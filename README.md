@@ -87,16 +87,17 @@ MuscleMetrics.ai/
 │   └── analysis.html         # Results page
 │
 ├── static/                   # Frontend assets
-│   ├── css/
-│   ├── js/
-│   └── images/
+│   ├── main.css/
+│   ├── main.js/
+│   ├── analysis.css/
+│   └── analysis.js/
 │
 ├── .env                      # Environment variables (not committed)
 ├── .gitignore
 │
-├── pyproject.toml            # Python dependencies (if using UV/Poetry)
+├── pyproject.toml            # Python dependencies
 ├── uv.lock                   # Locked dependencies
-├── mise.toml                 # Toolchain/version management (optional)
+├── mise.toml                 # Toolchain/version management
 ├── .python-version           # Python version
 │
 ├── README.md

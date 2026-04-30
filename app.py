@@ -16,7 +16,6 @@ from schemas.analysis import AnalysisStatus
 
 app = Flask(__name__)
 app.secret_key = flask_secret_key
-CORS(app)
 
 
 #Decorator to render the main HTML page.
