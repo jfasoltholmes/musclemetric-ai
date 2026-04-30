@@ -125,6 +125,9 @@ musclemetrics-ai/
 │   ├── analysis.css
 │   └── analysis.js
 │
+├── images/
+│   └── demo.gif
+│
 ├── .env                      # Environment variables (not committed)
 ├── .gitignore
 │
