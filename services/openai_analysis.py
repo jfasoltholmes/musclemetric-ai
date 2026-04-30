@@ -1,7 +1,7 @@
 from openai import OpenAI
 from schemas.analysis import BodyCompositionAnalysis
 
-client = OpenAI()
+client = OpenAI(timeout=30.0, max_retries=2)
 
 def analyze_physique(data_url: str) -> BodyCompositionAnalysis:
     response = client.responses.parse(

@@ -26,6 +26,8 @@ class GoalSection(BaseModel):
 class PhysiqueAssessment(BaseModel): 
     strong_points: list[str] = Field(
         ...,
+        min_length=2,
+        max_length=4,
         description=(
             "List of 2-4 observable physique strengths. " \
             "Each item should be one short sentence, ideally under 15 words. " \
@@ -34,6 +36,8 @@ class PhysiqueAssessment(BaseModel):
     )
     weak_points: list[str] = Field(
         ...,
+        min_length=0,
+        max_length=3,
         description=(
             "List of 0-3 observable physique weaknesses. " \
             "Each item should be one short sentence, ideally under 15 words. " \
@@ -51,6 +55,8 @@ class PhysiqueAssessment(BaseModel):
 class ImprovementFocus(BaseModel):
     top_priorities: list[str] = Field(
         ...,
+        min_length=1,
+        max_length=3,
         description=(
             "List of 1-3 improvement priorities. " \
             "Each item should be one short sentence, ideally under 15 words. " \
@@ -61,6 +67,8 @@ class ImprovementFocus(BaseModel):
 class AssessmentLimitations(BaseModel):
     photo_limitations: list[str] = Field(
         ...,
+        min_length=0,
+        max_length=3,
         description=(
             "List of 0-3 image-specific limitations that reduce assessment quality. " \
             "Each item should be one short sentence, ideally under 15 words."
@@ -68,8 +76,10 @@ class AssessmentLimitations(BaseModel):
     )
     interpretation_notes: list[str] = Field(
         ...,
+        min_length=0,
+        max_length=2,
         description=(
-            "List of 0-3 notes explaining how the image should be interpreted carefully. " \
+            "List of 0-2 notes explaining how the image should be interpreted carefully. " \
             "Each item should be one short sentence, ideally under 15 words."
         )
     )

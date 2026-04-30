@@ -8,7 +8,7 @@ from utils.file_utils import allowed_file, get_mime_type
 
 # Load OpenAI API key from environment variables before service import
 load_dotenv()
-openai_api_key = get_env_var("OPENAI_API_KEY")
+#openai_api_key = get_env_var("OPENAI_API_KEY")
 flask_secret_key = get_env_var("FLASK_SECRET_KEY")
 
 from services.openai_analysis import analyze_physique
@@ -64,8 +64,8 @@ def scan():
 
         return render_template('analysis.html', image_data=data_url, analysis=analysis)
 
-    except Exception as e:
-        flash(f"An error occurred: {str(e)}", "error")
+    except Exception:
+        flash(f"Something went wrong while analyzing the image. Please try again.", "error")
         return redirect(url_for('index'))
 
 if __name__ == '__main__':
