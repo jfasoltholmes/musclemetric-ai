@@ -67,6 +67,4 @@ def scan():
         return redirect(url_for('index'))
 
 if __name__ == '__main__':
-    # Remove the debug=True line to run in production mode
-    # For production, you might want to use a WSGI server like Gunicorn or uWSGI
-    app.run(debug=True)
+    app.run()
