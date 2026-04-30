@@ -1,43 +1,95 @@
-# MuscleMetrics.ai
+# MuscleMetrics.ai 💪📊
+<p align="center">
+  <img src="images/demo.gif" width="500"/>
+</p>
 
-A Flask-based web application for visual physique analysis using AI-generated structured insights.
+<p align="center">
+  A Flask-based web application for visual physique analysis using AI-generated structured insights.
+</p>
 
-Users can upload an image and receive a structured, AI-generated assessment including estimated body fat range, training recommendation (bulk/cut/etc.), and physique feedback.
+<p align="center">
+  <img src="https://img.shields.io/badge/Python-3.12-blue" />
+  <img src="https://img.shields.io/badge/Flask-WebApp-lightgrey" />
+  <img src="https://img.shields.io/badge/OpenAI-Structured%20Outputs-green" />
+  <img src="https://img.shields.io/github/stars/jfasoltholmes/musclemetrics-ai?style=social" />
+</p>
 
-## Current State
+## ⚡ Quick Start
 
-This project has been refactored into a modular architecture and now supports structured AI responses.
+Run the app locally:
 
-### Design Principles
+```bash
+git clone https://github.com/jfasoltholmes/musclemetrics-ai
+cd musclemetrics-ai
+mise install
+uv sync
+python app.py
+```
 
-- Analysis is based strictly on visible features in the image
-- The system avoids overgenerated or forced feedback (e.g., no invented weak points)
-- Output is structured but intentionally restrained to improve realism and trust
+## Why MuscleMetrics.ai?
+MuscleMetrics.ai explores how structured AI outputs can be used to generate consistent, user-facing analysis from unstructured image inputs.
+
+Instead of free-form responses, the system enforces:
+ - Predictable structure
+ - Controlled tone
+ - Strict visual grounding
+
+The goal is to make AI-generated feedback more reliable, constrained, and usable.
+
+## Overview
+MuscleMetrics.ai is a Flask-based web application that analyzes a user-uploaded image and returns a structured physique assessment.
+
+## Architecture
+
+### Backend
+ - Flask routing (app.py)
+ - Service layer for AI interaction
+ - Utility layer for file validation + config
+### AI Layer
+ - OpenAI Responses API
+ - Structured output parsing into Pydantic models
+ - Strict prompt constraints to prevent hallucination
+### Frontend
+ - Drag-and-drop image upload UI
+ - Vanilla JS interaction handling
+ - Server-rendered templates (Jinja2)
+
+## Features
 
 ### Implemented
+ - Drag-and-drop image upload
+ - In-memory image processing (no file storage)
+ - File validation (extension checks)
+ - OpenAI structured output integration
+ - Schema-based response parsing
+ - Loading state + UX feedback
+ - Flash message handling
+### Analysis Output
+ - Estimated body fat range
+ - Goal recommendation (bulk / cut / maintain / recomp)
+ - Rationale and actionable guidance
+ - Physique assessment:
+    - Strengths
+    - Weak points (if visible)
+    - Fat distribution
+ - Improvement priorities
+ - Image quality note
+ - Image-specific limitations
 
-- Flask backend with clean routing
-- Drag-and-drop image upload UI
-- In-memory image processing (no file persistence)
-- File validation (type + basic checks)
-- OpenAI API integration using image + structured outputs
-- Single-call analysis pipeline using OpenAI structured outputs (reduced latency and cost)
-- Pydantic schema for structured response parsing
-- Service layer for AI logic (services/)
-- Utility layer for config + file handling (utils/)
+## Design Principles
 
-### Analysis Output Includes
+- Visual-only analysis (no inference beyond observable features)
+- No hallucinated feedback (avoids forced or invented insights)
+- Structured responses (enforced schema for consistency)
+- Minimalism over verbosity (concise, realistic output)
 
-- Estimated body fat range
-- Recommended goal (bulk, cut, maintain, recomp)
-- Rationale and actionable guidance
-- Physique assessment:
-  - Strengths
-  - Weak points (if visible)
-  - Body fat distribution
-- Improvement priorities
-- Image quality note
-- Image-specific limitations and interpretation notes
+## Deployment Notes
+
+Designed to run behind a WSGI server (e.g., Gunicorn)
+
+Required environment variables:
+ - `OPENAI_API_KEY`
+ - `FLASK_SECRET_KEY`
 
 ## Tech Stack
 
@@ -48,28 +100,9 @@ This project has been refactored into a modular architecture and now supports st
 - Pydantic
 - OpenAI API (Responses API + Structured Outputs)
 
-## Local Setup
-
-1. Create a `.env` file with the required secrets:
-  - `OPENAI_API_KEY`
-  - `FLASK_SECRET_KEY`
-
-2. Create and activate your environment.
-
-3. Install dependencies.
-
-4. Run the Flask app locally.
-
-## Immediate Goals
-
-- Improve frontend UX and results presentation
-- Handle edge cases in model output more gracefully
-- Optimize prompts and response consistency
-- Prepare for production deployment
-
 ## Repository Structure
 ```bash
-MuscleMetrics.ai/
+musclemetrics-ai/
 ├── app.py                     # Flask app entry point + routes
 │
 ├── schemas/                  # Data models and structured output schemas
@@ -87,10 +120,10 @@ MuscleMetrics.ai/
 │   └── analysis.html         # Results page
 │
 ├── static/                   # Frontend assets
-│   ├── main.css/
-│   ├── main.js/
-│   ├── analysis.css/
-│   └── analysis.js/
+│   ├── main.css
+│   ├── main.js
+│   ├── analysis.css
+│   └── analysis.js
 │
 ├── .env                      # Environment variables (not committed)
 ├── .gitignore
